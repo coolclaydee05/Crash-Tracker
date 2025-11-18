@@ -1,0 +1,29 @@
+{
+  "device1": {
+    "lat": 11.5,
+    "lng": 124.5,
+    "gforce": 6,
+    "gyro": 0,
+    "timestamp": "2025-11-16T14:26:06.255Z",
+    "status": "ONLINE",
+    "crash": true
+  },
+  "000000000000": {
+    "lat": 11.5,
+    "lng": 124.5,
+    "gforce": 1,
+    "gyro": 0.7,
+    "timestamp": "2025-11-16T16:20:43.811Z",
+    "status": "ONLINE",
+    "crash": false
+  },
+  "esp32-crash-tracker-01": {
+    "lat": 11.471578,
+    "lng": 124.485738,
+    "gforce": 1,
+    "gyro": 0.7,
+    "timestamp": "2025-11-18T02:14:20.731Z",
+    "status": "ONLINE",
+    "crash": false
+  }
+}

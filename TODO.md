@@ -13,5 +13,5 @@
 - [x] Add JWT verification middleware
 - [x] Update protected endpoints to use JWT instead of user-email headers
 - [x] Add comprehensive input validation to all endpoints
-- [ ] Test updated endpoints with curl
-- [ ] Verify fixes resolve issues
+- [x] Test updated endpoints with curl
+- [x] Verify fixes resolve issues

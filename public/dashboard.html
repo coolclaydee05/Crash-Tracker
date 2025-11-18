@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Crash Tracker - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>#map{height:500px}</style>
+</head>
+<body class="dashboard-bg">
+  <div id="crashNotification" class="hidden crash-notification text-white text-center py-4 font-semibold text-lg">
+    <i class="fas fa-exclamation-triangle mr-2"></i>CRASH DETECTED! Check device status immediately.
+  </div>
+  <nav class="nav-bar shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <i class="fas fa-car-crash text-white text-2xl mr-3"></i>
+        <div class="text-xl font-semibold text-white">Crash Tracker</div>
+      </div>
+      <div><button id="logoutBtn" class="px-6 py-2 bg-white text-red-600 rounded-lg hover:bg-gray-100 transition-all font-semibold">Logout</button></div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto p-6 dashboard-grid grid grid-cols-3 gap-6">
+    <section class="col-span-1 card-enhanced p-6">
+      <div class="flex items-center mb-4">
+        <i class="fas fa-tachometer-alt text-blue-600 text-2xl mr-3"></i>
+        <h3 class="font-semibold text-xl text-blue-600">Device Status</h3>
+      </div>
+      <div class="mb-4">
+        <label for="deviceSelect" class="block text-sm font-medium text-gray-700 mb-2">Select Device:</label>
+        <select id="deviceSelect" class="w-full p-2 border border-gray-300 rounded-lg">
+          <option value="">Loading devices...</option>
+        </select>
+      </div>
+      <div id="registerDevice" class="mb-4 p-4 bg-gray-50 rounded-lg">
+        <h4 class="font-semibold text-gray-700 mb-2">Register New Device</h4>
+        <input id="deviceId" placeholder="Device ID" class="w-full p-2 mb-2 border border-gray-300 rounded-lg" required>
+        <input id="deviceName" placeholder="Device Name" class="w-full p-2 mb-2 border border-gray-300 rounded-lg" required>
+        <button id="registerBtn" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Register Device</button>
+      </div>
+      <div id="statusCard" class="space-y-4">
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div class="flex items-center">
+            <i class="fas fa-clock text-blue-500 mr-2"></i>
+            <strong class="text-gray-700">Current Time:</strong>
+          </div>
+          <span id="currentTime" class="font-medium">--</span>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div class="flex items-center">
+            <span class="status-indicator status-offline"></span>
+            <strong class="text-gray-700">Connection:</strong>
+          </div>
+          <span id="conn" class="font-medium">--</span>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div class="flex items-center">
+            <i class="fas fa-clock text-gray-500 mr-2"></i>
+            <strong class="text-gray-700">Last update:</strong>
+          </div>
+          <span id="last" class="font-medium">--</span>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div class="flex items-center">
+            <i class="fas fa-bolt text-yellow-500 mr-2"></i>
+            <strong class="text-gray-700">G-Force:</strong>
+          </div>
+          <span id="gforce" class="font-medium">--</span>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div class="flex items-center">
+            <i class="fas fa-sync-alt text-green-500 mr-2"></i>
+            <strong class="text-gray-700">Gyro:</strong>
+          </div>
+          <span id="gyro" class="font-medium">--</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="col-span-2 card-enhanced p-6">
+      <div class="flex items-center mb-4">
+        <i class="fas fa-map-marked-alt text-blue-600 text-2xl mr-3"></i>
+        <h3 class="font-semibold text-xl text-blue-600">Real-time Map</h3>
+      </div>
+      <div id="map" class="rounded-lg overflow-hidden shadow-inner"></div>
+    </section>
+
+    <section class="col-span-3 card-enhanced p-6">
+      <div class="flex items-center mb-4">
+        <i class="fas fa-history text-red-600 text-2xl mr-3"></i>
+        <h3 class="font-semibold text-xl text-red-600">Crash History</h3>
+        <a href="/crash_history.html" class="ml-auto px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm">View Full History</a>
+      </div>
+      <div id="crashHistory" class="overflow-x-auto">
+        <table class="w-full table-auto border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-300 px-4 py-2 text-left">Timestamp</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">G-Force</th>
+              <th class="border border-gray-300 px-4 py-2 text-left">Gyro</th>
+            </tr>
+          </thead>
+          <tbody id="crashTableBody">
+            <tr>
+              <td colspan="4" class="border border-gray-300 px-4 py-2 text-center text-gray-500">No crash history available</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/dashboard.js"></script>
+</body>
+</html>
